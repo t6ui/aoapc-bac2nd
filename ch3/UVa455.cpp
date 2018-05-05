@@ -2,31 +2,24 @@
 #include <string.h>
 
 int main() {
-    int T;
+    int T, len, i, j;
     char s[81];
-    char set[81];
     scanf("%d", &T);
     while(T--) {
-        memset(set, 0, 81);
         scanf("%s", s);
-        int len = strlen(s);
-        set[0] = s[0];
-        for(int i = 0; i < len; i++) {
-            int n = strlen(set);
-            int j = i % n;
-            printf("%d %c\n", i, s[i]);
-            printf("%d %c\n", j, set[j]);
-
-            if (set[j] != s[i]) {
-                for(int k = 0; k <= i; k++ )
-                    set[k] = s[k];
+        len = strlen(s);
+        for(i = 1; i <= len; i++) {
+            if(len % i == 0) {
+                for(j = i; j <= len; j++)
+                    if(s[j % i] != s[j])
+                        break;
+                if(j == len) {
+                    printf("%d\n", i);
+                    break;
+                }
             }
         }
-        int size = strlen(set);
-        if (len % size == 0) {
-            printf("%d\n", size);
-        } else {
-            printf("%d\n", len);
-        }
+        if(T) printf("\n");
     }
+    return 0;
 }
